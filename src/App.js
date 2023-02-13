@@ -3,7 +3,7 @@ import './App.css';
 import ImageGrallery from './ImageGrallery';
 
 function App() {
- const [fatchData, setFetchData] = useState([]);
+ const [fetchData, setFetchData] = useState([]);
  const ref = useRef();
 
  const handleSubmit = (e)=>{
@@ -18,7 +18,9 @@ function App() {
     return res.json();
   })
   .then((data) => {
-    setFetchData(data)
+    console.log(data.hits)
+    setFetchData(data.hits)
+    //オブジェクト内の配列に指定（data.hit）
   });
  }
 
@@ -28,7 +30,7 @@ function App() {
       <form onSubmit={(e) => handleSubmit (e)}>
         <input type="text" placeholder="画像を探す" ref={ref} />
       </form>
-    <ImageGrallery />
+    <ImageGrallery fetchData={fetchData}/>
   </div>
   );
 }
